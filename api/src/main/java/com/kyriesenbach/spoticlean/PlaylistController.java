@@ -9,48 +9,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
-import java.net.URI;
 
-@RestController("/spotify")
-public class SpotifyController
+@RestController
+@RequestMapping("/spotify/playlist")
+public class PlaylistController
 {
     private final SpotifyService spotifyService;
     
     @Autowired
-    public SpotifyController(SpotifyService spotifyService)
+    public PlaylistController(SpotifyService spotifyService)
     {
         this.spotifyService = spotifyService;
     }
     
-    @GetMapping("/authorize")
-    public URI authorize()
-    {
-        return spotifyService.getAuthURL();
-    }
-    
-    @GetMapping("/accesstoken")
-    public String getAccessToken(@RequestParam String authorizationCode) throws SpotifyWebApiException, ParseException, IOException
-    {
-        return spotifyService.getAccessToken(authorizationCode);
-    }
-    
-    @GetMapping("/playlist")
+    @GetMapping
     public Playlist getPlaylist(@RequestHeader(name = "Authorization") String accessToken, @RequestParam String id) throws SpotifyWebApiException, ParseException, IOException
     {
         return spotifyService.getPlaylist(accessToken, id);
     }
     
-    @GetMapping("/playlist/current")
+    @GetMapping("/current")
     public Paging<PlaylistSimplified> getCurrentUserPlaylists(@RequestHeader(name = "Authorization") String accessToken) throws ParseException, SpotifyWebApiException, IOException
     {
         return spotifyService.getCurrentUserPlaylists(accessToken);
     }
     
-    @PostMapping("/playlist/create")
+    @PostMapping("/create")
     public Playlist createPlaylist(@RequestHeader(name = "Authorization") String accessToken, @RequestParam String name) throws ParseException, SpotifyWebApiException, IOException
     {
         return spotifyService.createPlaylist(accessToken, name, true);
