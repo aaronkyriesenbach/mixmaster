@@ -25,7 +25,7 @@ public class SearchController
     }
     
     @GetMapping("/track")
-    public Paging<Track> searchTracks(@RequestHeader(name = "Authorization") String accessToken, String query) throws ParseException, SpotifyWebApiException, IOException
+    public Paging<Track> searchTracks(@RequestHeader(name = "Authorization") String accessToken, String query) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
         return spotifyService.searchTracks(accessToken, query);
     }
