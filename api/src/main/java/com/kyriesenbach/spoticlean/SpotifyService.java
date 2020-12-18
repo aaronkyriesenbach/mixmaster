@@ -6,12 +6,14 @@ import com.wrapper.spotify.model_objects.credentials.AuthorizationCodeCredential
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.Playlist;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
+import com.wrapper.spotify.model_objects.specification.Track;
 import com.wrapper.spotify.model_objects.specification.User;
 import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeRequest;
 import com.wrapper.spotify.requests.authorization.authorization_code.AuthorizationCodeUriRequest;
 import com.wrapper.spotify.requests.data.playlists.CreatePlaylistRequest;
 import com.wrapper.spotify.requests.data.playlists.GetListOfCurrentUsersPlaylistsRequest;
 import com.wrapper.spotify.requests.data.playlists.GetPlaylistRequest;
+import com.wrapper.spotify.requests.data.search.simplified.SearchTracksRequest;
 import com.wrapper.spotify.requests.data.users_profile.GetCurrentUsersProfileRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.core5.http.ParseException;
@@ -70,5 +72,12 @@ public class SpotifyService
         spotifyApi.setAccessToken(accessToken);
         final CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(getCurrentUser().getId(), name).public_(public_).build();
         return createPlaylistRequest.execute();
+    }
+    
+    public Paging<Track> searchTracks(String accessToken, String query) throws ParseException, SpotifyWebApiException, IOException
+    {
+        spotifyApi.setAccessToken(accessToken);
+        final SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(query).build();
+        return searchTracksRequest.execute();
     }
 }
