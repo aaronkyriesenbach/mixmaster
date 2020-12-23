@@ -1,4 +1,4 @@
-package com.kyriesenbach.spoticlean;
+package com.kyriesenbach.spoticlean.auth;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import org.apache.hc.core5.http.ParseException;
@@ -15,23 +15,23 @@ import java.net.URI;
 @RequestMapping("/spotify/auth")
 public class AuthController
 {
-    private final SpotifyService spotifyService;
+    private final AuthService authService;
     
     @Autowired
-    public AuthController(SpotifyService spotifyService)
+    public AuthController(AuthService authService)
     {
-        this.spotifyService = spotifyService;
+        this.authService = authService;
     }
     
     @GetMapping
-    public URI authorize()
+    public URI getAuthUrl()
     {
-        return spotifyService.getAuthURL();
+        return authService.getAuthURL();
     }
     
     @GetMapping("/accesstoken")
     public String getAccessToken(@RequestParam String authorizationCode) throws SpotifyWebApiException, ParseException, IOException
     {
-        return spotifyService.getAccessToken(authorizationCode);
+        return authService.getAccessToken(authorizationCode);
     }
 }

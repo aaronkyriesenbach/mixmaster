@@ -1,4 +1,4 @@
-package com.kyriesenbach.spoticlean;
+package com.kyriesenbach.spoticlean.playlist;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Paging;
@@ -24,30 +24,48 @@ import java.util.List;
 @Slf4j
 public class PlaylistController
 {
-    private final SpotifyService spotifyService;
+    private final PlaylistService playlistService;
     
     @Autowired
-    public PlaylistController(SpotifyService spotifyService)
+    public PlaylistController(PlaylistService playlistService)
     {
-        this.spotifyService = spotifyService;
+        this.playlistService = playlistService;
     }
     
     @GetMapping
     public Playlist getPlaylist(@RequestHeader(name = "Authorization") String accessToken, @RequestParam String id) throws SpotifyWebApiException, ParseException, IOException
     {
-        return spotifyService.getPlaylist(accessToken, id);
+        return playlistService.getPlaylist(accessToken, id);
+    }
+    
+    @GetMapping("/{id}/items")
+    public List<Track> getPlaylistItems(
+        @RequestHeader(name = "Authorization") String accessToken,
+        @PathVariable("id") String playlistId)
+        throws ParseException, SpotifyWebApiException, IOException
+    {
+        return playlistService.getPlaylistItems(accessToken, playlistId);
     }
     
     @GetMapping("/current")
     public Paging<PlaylistSimplified> getCurrentUserPlaylists(@RequestHeader(name = "Authorization") String accessToken) throws ParseException, SpotifyWebApiException, IOException
     {
-        return spotifyService.getCurrentUserPlaylists(accessToken);
+        return playlistService.getCurrentUserPlaylists(accessToken);
     }
     
     @PostMapping("/create")
     public Playlist createPlaylist(@RequestHeader(name = "Authorization") String accessToken, @RequestParam String name) throws ParseException, SpotifyWebApiException, IOException
     {
-        return spotifyService.createPlaylist(accessToken, name, true);
+        return playlistService.createPlaylist(accessToken, name, true);
+    }
+    
+    @PostMapping("/{id}/duplicate")
+    public Playlist duplicatePlaylist(
+        @RequestHeader(name = "Authorization") String accessToken,
+        @PathVariable("id") String oldPlaylistId,
+        @RequestParam("newPlaylistName") String newPlaylistName) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
+    {
+        return playlistService.duplicatePlaylist(accessToken, oldPlaylistId, newPlaylistName);
     }
     
     @PostMapping("/{id}/clean")
@@ -57,24 +75,6 @@ public class PlaylistController
         @RequestParam String cleanPlaylistName)
         throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
-        return spotifyService.cleanPlaylist(accessToken, oldPlaylistId, cleanPlaylistName);
-    }
-    
-    @GetMapping("/{id}/tracks")
-    public List<Track> getTracks(
-        @RequestHeader(name = "Authorization") String accessToken,
-        @PathVariable("id") String playlistId)
-        throws ParseException, SpotifyWebApiException, IOException
-    {
-        return spotifyService.getPlaylistTracks(accessToken, playlistId);
-    }
-    
-    @PostMapping("/{id}/duplicate")
-    public Playlist duplicatePlaylist(
-        @RequestHeader(name = "Authorization") String accessToken,
-        @PathVariable("id") String oldPlaylistId,
-        @RequestParam("newPlaylistName") String newPlaylistName) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
-    {
-        return spotifyService.duplicatePlaylist(accessToken, oldPlaylistId, newPlaylistName);
+        return playlistService.cleanPlaylist(accessToken, oldPlaylistId, cleanPlaylistName);
     }
 }

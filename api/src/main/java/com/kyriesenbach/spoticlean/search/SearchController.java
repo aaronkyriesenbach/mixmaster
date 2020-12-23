@@ -1,4 +1,4 @@
-package com.kyriesenbach.spoticlean;
+package com.kyriesenbach.spoticlean.search;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Paging;
@@ -16,17 +16,17 @@ import java.io.IOException;
 @RequestMapping("/spotify/search")
 public class SearchController
 {
-    private final SpotifyService spotifyService;
+    private final SearchService searchService;
     
     @Autowired
-    public SearchController(SpotifyService spotifyService)
+    public SearchController(SearchService searchService)
     {
-        this.spotifyService = spotifyService;
+        this.searchService = searchService;
     }
     
     @GetMapping("/track")
     public Paging<Track> searchTracks(@RequestHeader(name = "Authorization") String accessToken, String query) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
-        return spotifyService.searchTracks(accessToken, query);
+        return searchService.searchTracks(accessToken, query);
     }
 }
