@@ -9,3 +9,9 @@ logging:
 
 server:
   port: 8080
+
+spoticlean:
+  spotify:
+    clientId: ${SPOTIFY_CLIENT_ID}
+    clientSecret: ${SPOTIFY_CLIENT_SECRET}
+    redirectUri: ${REDIRECT_URI:http://localhost}
