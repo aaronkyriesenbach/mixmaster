@@ -1,7 +1,7 @@
 package com.kyriesenbach.spoticlean.playlist;
 
-import com.kyriesenbach.spoticlean.auth.AuthService;
 import com.kyriesenbach.spoticlean.search.SearchService;
+import com.kyriesenbach.spoticlean.user.UserService;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.exceptions.detailed.TooManyRequestsException;
@@ -29,14 +29,14 @@ import java.util.stream.Collectors;
 public class PlaylistService
 {
     private final SpotifyApi spotifyApi;
-    private final AuthService authService;
+    private final UserService userService;
     private final SearchService searchService;
     
     @Autowired
-    public PlaylistService(SpotifyApi spotifyApi, AuthService authService, SearchService searchService)
+    public PlaylistService(SpotifyApi spotifyApi, UserService userService, SearchService searchService)
     {
         this.spotifyApi = spotifyApi;
-        this.authService = authService;
+        this.userService = userService;
         this.searchService = searchService;
     }
     
@@ -71,7 +71,7 @@ public class PlaylistService
     public Playlist createPlaylist(String accessToken, String name, boolean public_) throws ParseException, SpotifyWebApiException, IOException
     {
         spotifyApi.setAccessToken(accessToken);
-        final CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(authService.getCurrentUser().getId(), name).public_(public_).build();
+        final CreatePlaylistRequest createPlaylistRequest = spotifyApi.createPlaylist(userService.getCurrentUser(accessToken).getId(), name).public_(public_).build();
         return createPlaylistRequest.execute();
     }
     

@@ -32,8 +32,8 @@ public class PlaylistController
         this.playlistService = playlistService;
     }
     
-    @GetMapping
-    public Playlist getPlaylist(@RequestHeader(name = "Authorization") String accessToken, @RequestParam String id) throws SpotifyWebApiException, ParseException, IOException
+    @GetMapping("/{id}")
+    public Playlist getPlaylist(@RequestHeader(name = "Authorization") String accessToken, @PathVariable("id") String id) throws SpotifyWebApiException, ParseException, IOException
     {
         return playlistService.getPlaylist(accessToken, id);
     }
@@ -45,12 +45,6 @@ public class PlaylistController
         throws ParseException, SpotifyWebApiException, IOException
     {
         return playlistService.getPlaylistItems(accessToken, playlistId);
-    }
-    
-    @GetMapping("/current")
-    public Paging<PlaylistSimplified> getCurrentUserPlaylists(@RequestHeader(name = "Authorization") String accessToken) throws ParseException, SpotifyWebApiException, IOException
-    {
-        return playlistService.getCurrentUserPlaylists(accessToken);
     }
     
     @PostMapping("/create")
