@@ -50,10 +50,10 @@ public class PlaylistController
         return spotifyService.createPlaylist(accessToken, name, true);
     }
     
-    @PostMapping("/clean")
+    @PostMapping("/{id}/clean")
     public Playlist cleanPlaylist(
         @RequestHeader(name = "Authorization") String accessToken,
-        @RequestParam String oldPlaylistId,
+        @PathVariable("id") String oldPlaylistId,
         @RequestParam String cleanPlaylistName)
         throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
@@ -67,5 +67,14 @@ public class PlaylistController
         throws ParseException, SpotifyWebApiException, IOException
     {
         return spotifyService.getPlaylistTracks(accessToken, playlistId);
+    }
+    
+    @PostMapping("/{id}/duplicate")
+    public Playlist duplicatePlaylist(
+        @RequestHeader(name = "Authorization") String accessToken,
+        @PathVariable("id") String oldPlaylistId,
+        @RequestParam("newPlaylistName") String newPlaylistName) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
+    {
+        return spotifyService.duplicatePlaylist(accessToken, oldPlaylistId, newPlaylistName);
     }
 }

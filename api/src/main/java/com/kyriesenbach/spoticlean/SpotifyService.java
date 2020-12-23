@@ -28,6 +28,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -94,15 +95,26 @@ public class SpotifyService
         }
     }
     
-    public void addItemsToPlaylist(String accessToken, String playlistId, List<String> uris) throws ParseException, SpotifyWebApiException, IOException
+    public void addItemsToPlaylist(String accessToken, String playlistId, List<String> uris) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
         spotifyApi.setAccessToken(accessToken);
-        while (uris.size() > 100)
+        // 93 at a time appears to be an arbitrary limit imposed by Spotify's API.
+        // Using a value of more than 93 will cause the items to simply not be added.
+        final int limit = 93;
+        while (uris.size() > limit)
         {
-            final AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(playlistId, uris.subList(0, 100).toArray(String[]::new)).build();
-            addItemsToPlaylistRequest.execute();
-            uris = uris.subList(100, uris.size());
-            log.info("Added to playlist");
+            final String[] uriArray = uris.subList(0, limit).toArray(String[]::new);
+            final AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(playlistId, uriArray).build();
+            try
+            {
+                addItemsToPlaylistRequest.execute();
+            }
+            catch (TooManyRequestsException e)
+            {
+                Thread.sleep(e.getRetryAfter() * 1000L);
+                addItemsToPlaylistRequest.execute();
+            }
+            uris = uris.subList(limit, uris.size());
         }
         final AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(playlistId, uris.toArray(String[]::new)).build();
         addItemsToPlaylistRequest.execute();
@@ -129,7 +141,6 @@ public class SpotifyService
         List<String> cleanUris = new ArrayList<>();
         for (Track track : oldTracks)
         {
-            log.info("Attempting to add " + track.getName());
             Paging<Track> searchResults = searchTracks(accessToken, "track:" + track.getName() + " artist:" + track.getArtists()[0].getName());
             for (Track result : searchResults.getItems())
             {
@@ -138,7 +149,6 @@ public class SpotifyService
                     && track.getAlbum().getName().equals(result.getAlbum().getName())
                     && !result.getIsExplicit())
                 {
-                    log.info("Adding clean version " + result.getName());
                     cleanUris.add(result.getUri());
                     break;
                 }
@@ -147,5 +157,14 @@ public class SpotifyService
         Playlist cleanPlaylist = createPlaylist(accessToken, cleanPlaylistName, true);
         addItemsToPlaylist(accessToken, cleanPlaylist.getId(), cleanUris);
         return cleanPlaylist;
+    }
+    
+    public Playlist duplicatePlaylist(String accessToken, String oldPlaylistId, String newPlaylistName) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
+    {
+        spotifyApi.setAccessToken(accessToken);
+        final Playlist newPlaylist = createPlaylist(accessToken, newPlaylistName, true);
+        List<String> uris = getPlaylistTracks(accessToken, oldPlaylistId).stream().map(Track::getUri).collect(Collectors.toList());
+        addItemsToPlaylist(accessToken, newPlaylist.getId(), uris);
+        return newPlaylist;
     }
 }
