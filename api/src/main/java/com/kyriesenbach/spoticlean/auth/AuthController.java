@@ -23,15 +23,15 @@ public class AuthController
         this.authService = authService;
     }
     
-    @GetMapping
+    @GetMapping("/url")
     public URI getAuthUrl()
     {
         return authService.getAuthURL();
     }
     
-    @GetMapping("/accesstoken")
-    public String getAccessToken(@RequestParam String authorizationCode) throws SpotifyWebApiException, ParseException, IOException
+    @GetMapping("/token")
+    public String getAccessToken(@RequestParam String code) throws SpotifyWebApiException, ParseException, IOException
     {
-        return authService.getAccessToken(authorizationCode);
+        return authService.getAccessToken(code);
     }
 }
