@@ -1,34 +1,32 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 
 export default class Main extends React.Component<Props, State> {
-    state: State = {};
-
-    componentDidMount() {
-        this.setState({ spotifyApi: new SpotifyApi() });
+    constructor(props: Props) {
+        super(props);
+        this.state = {};
     }
 
-    componentDidUpdate() {
-        const { spotifyApi } = this.state;
+    componentDidMount() {
+        const { spotifyApi } = this.props;
 
         spotifyApi?.getAuthorizationUrl().then(response => {
-            console.log(response);
             this.setState({ authUrl: response.data });
         });
     }
 
     render() {
-        const { authUrl } = this.state;
-
         return (
-            <a href={authUrl ?? 'https://google.com'}>sign in to spotify</a>
+            <a href={this.state.authUrl ?? 'https://google.com'}>sign in to spotify</a>
         );
     }
 }
 
-type Props = {};
+interface Props extends RouteComponentProps<any> {
+    spotifyApi: SpotifyApi;
+}
 
 type State = {
-    spotifyApi?: SpotifyApi,
     authUrl?: string;
 };

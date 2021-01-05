@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
 
@@ -30,8 +32,13 @@ public class AuthController
     }
     
     @GetMapping("/token")
-    public String getAccessToken(@RequestParam String code) throws SpotifyWebApiException, ParseException, IOException
+    public String getAccessToken(@RequestParam String code, HttpServletResponse response) throws SpotifyWebApiException, ParseException, IOException
     {
-        return authService.getAccessToken(code);
+        Cookie cookie = new Cookie("token", authService.getAccessToken(code));
+        // Spotify access tokens expire after one hour
+        cookie.setMaxAge(3600);
+        response.addCookie(cookie);
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        return "Token served in cookie";
     }
 }

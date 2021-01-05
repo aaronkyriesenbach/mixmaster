@@ -1,8 +1,12 @@
 import React from 'react';
+import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 
 export default class Authorization extends React.Component<Props, State> {
-    state: State = {}
+    constructor(props: Props) {
+        super(props);
+        this.state = {};
+    }
 
     componentDidMount() {
         const { location } = this.props;
@@ -10,17 +14,21 @@ export default class Authorization extends React.Component<Props, State> {
         const authCode = query.get('code');
 
         this.setState({
-            spotifyApi: new SpotifyApi(),
             authCode: authCode !== null ? authCode : undefined
         });
     }
 
     componentDidUpdate(prevProps: Readonly<Props>, prevState: Readonly<State>) {
-        const { authCode, spotifyApi } = this.state;
+        const { authCode } = this.state;
+        const { spotifyApi } = this.props;
 
         if (prevState.authCode !== authCode && authCode !== undefined) {
-            spotifyApi!.getAccessToken(this.state.authCode!)
-                .then(response => this.setState({ accessToken: response.data }));
+            spotifyApi!.getAccessToken(authCode!)
+                .then(response => {
+                    console.log("Headers:");
+                    console.log(response.headers);
+                    this.setState({ accessToken: response.data });
+                });
         }
     }
 
@@ -34,12 +42,11 @@ export default class Authorization extends React.Component<Props, State> {
     }
 }
 
-type Props = {
-    location: Location;
-};
+interface Props extends RouteComponentProps<any> {
+    spotifyApi: SpotifyApi;
+}
 
 type State = {
-    spotifyApi?: SpotifyApi,
     authCode?: string,
     accessToken?: string;
 };

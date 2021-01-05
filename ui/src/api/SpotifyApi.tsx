@@ -13,6 +13,6 @@ export default class SpotifyApi {
     }
 
     public getAccessToken(authorizationCode: string): Promise<AxiosResponse<string>> {
-        return this.api.get("/auth/token?code=" + authorizationCode);
+        return this.api.get("/auth/token?code=" + authorizationCode, { withCredentials: true });
     }
 }    

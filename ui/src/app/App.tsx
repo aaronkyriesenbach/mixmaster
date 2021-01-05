@@ -1,17 +1,28 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'react-router-dom';
+import SpotifyApi from '../api/SpotifyApi';
 import Authorization from './Authorization';
 import Main from './Main';
 
-function App() {
-  return (
-    <Router>
-      <Switch>
-        <Route path="/spotify/auth" component={Authorization} />
-        <Route component={Main} />
-      </Switch>
-    </Router>
-  );
+export default class App extends React.Component<any, State> {
+  componentWillMount() {
+    this.setState({ spotifyApi: new SpotifyApi() });
+  }
+
+  render() {
+    const { spotifyApi } = this.state;
+
+    return (
+      <Router>
+        <Switch>
+          <Route path="/spotify/auth" render={(props: RouteComponentProps<any>) => (<Authorization {...props} spotifyApi={spotifyApi} />)} />
+          <Route render={(props: RouteComponentProps<any>) => (<Main {...props} spotifyApi={spotifyApi} />)} />
+        </Switch>
+      </Router>
+    );
+  }
 }
 
-export default App;
+type State = {
+  spotifyApi: SpotifyApi;
+};
