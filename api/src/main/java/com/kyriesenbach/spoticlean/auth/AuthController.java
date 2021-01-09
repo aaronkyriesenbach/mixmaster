@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.net.URI;
@@ -34,10 +33,9 @@ public class AuthController
     @GetMapping("/token")
     public String getAccessToken(@RequestParam String code, HttpServletResponse response) throws SpotifyWebApiException, ParseException, IOException
     {
-        Cookie cookie = new Cookie("token", authService.getAccessToken(code));
-        // Spotify access tokens expire after one hour
-        cookie.setMaxAge(3600);
-        response.addCookie(cookie);
+        // This cookie is being set manually, as opposed to with response.setCookie(), because Spring's Cookie implementation doesn't
+        // appear to support the sameSite attribute, which Chrome is yelling at me about.
+        response.setHeader("Set-Cookie", "token=" + authService.getAccessToken(code) + "; Max-Age=3600; SameSite=None; Secure");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         return "Token served in cookie";
     }
