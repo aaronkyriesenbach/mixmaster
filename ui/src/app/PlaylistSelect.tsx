@@ -7,6 +7,13 @@ export default class PlaylistSelect extends React.Component<Props, State> {
         this.state = {};
     }
 
+    componentDidMount() {
+        const { spotifyApi } = this.props;
+
+        spotifyApi.getCurrentUserPlaylists()
+            .then(response => console.log(response));
+    }
+
     render() {
         return <header>test text</header>;
     }

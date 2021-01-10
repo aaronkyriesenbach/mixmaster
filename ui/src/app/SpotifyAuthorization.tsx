@@ -2,6 +2,7 @@ import cookie from 'cookie';
 import React from 'react';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
+import { SPOTIFY_TOKEN } from '../constants';
 
 export default class SpotifyAuthorization extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -13,18 +14,14 @@ export default class SpotifyAuthorization extends React.Component<Props, State> 
         const { location, spotifyApi } = this.props;
         const query = new URLSearchParams(location.search);
         const authCode = query.get('code');
-        const token = cookie.parse(document.cookie)['token'];
 
-        if (token !== undefined) {
-            window.location.href = "/spotify/playlistSelect";
-        }
-        else if (authCode !== null) {
+        if (authCode !== null) {
             spotifyApi.getAccessToken(authCode);
         }
     }
 
     render() {
-        const token = cookie.parse(document.cookie)['spotify_token'];
+        const token = cookie.parse(document.cookie)[SPOTIFY_TOKEN];
 
         if (token !== undefined) {
             window.location.href = "/spotify/playlistSelect";

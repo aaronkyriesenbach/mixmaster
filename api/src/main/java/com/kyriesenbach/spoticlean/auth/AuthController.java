@@ -39,7 +39,6 @@ public class AuthController
         // This cookie is being set manually, as opposed to with response.setCookie(), because Spring's Cookie implementation doesn't
         // appear to support the sameSite attribute.
         response.setHeader("Set-Cookie", COOKIE_NAME + "=" + authService.getAccessToken(code) + "; Max-Age=3600; SameSite=None; Secure");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
         return "Token served in cookie";
     }
 }

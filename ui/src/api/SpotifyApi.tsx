@@ -5,7 +5,7 @@ export default class SpotifyApi {
     api: AxiosInstance;
 
     constructor() {
-        this.api = axios.create({ baseURL: BASE_API_URL + "/spotify" });
+        this.api = axios.create({ baseURL: BASE_API_URL + "/spotify", withCredentials: true });
     }
 
     public getAuthorizationUrl(): Promise<AxiosResponse<string>> {
@@ -13,6 +13,10 @@ export default class SpotifyApi {
     }
 
     public getAccessToken(authorizationCode: string): Promise<AxiosResponse<string>> {
-        return this.api.get("/auth/token?code=" + authorizationCode, { withCredentials: true });
+        return this.api.get("/auth/token?code=" + authorizationCode);
+    }
+
+    public getCurrentUserPlaylists() {
+        return this.api.get("/user/playlists");
     }
 }    
