@@ -21,9 +21,8 @@ public class UserService
         this.spotifyApi = spotifyApi;
     }
     
-    public User getCurrentUser(String accessToken) throws ParseException, SpotifyWebApiException, IOException
+    public User getCurrentUser() throws ParseException, SpotifyWebApiException, IOException
     {
-        spotifyApi.setAccessToken(accessToken);
         final GetCurrentUsersProfileRequest getCurrentUsersProfileRequest = spotifyApi.getCurrentUsersProfile().build();
         return getCurrentUsersProfileRequest.execute();
     }

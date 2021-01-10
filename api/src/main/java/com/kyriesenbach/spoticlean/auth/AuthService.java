@@ -25,7 +25,9 @@ public class AuthService
     
     public URI getAuthURL()
     {
-        AuthorizationCodeUriRequest authorizationCodeUriRequest = spotifyApi.authorizationCodeUri().scope("playlist-modify-public, playlist-modify-private").build();
+        AuthorizationCodeUriRequest authorizationCodeUriRequest = spotifyApi.authorizationCodeUri()
+            .scope("playlist-modify-public, playlist-modify-private")
+            .build();
         return authorizationCodeUriRequest.execute();
     }
     

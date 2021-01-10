@@ -9,7 +9,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,14 +30,14 @@ public class UserController
     }
     
     @GetMapping("/current")
-    public User getCurrentUser(@RequestHeader(name = "Authorization") String accessToken) throws ParseException, SpotifyWebApiException, IOException
+    public User getCurrentUser() throws ParseException, SpotifyWebApiException, IOException
     {
-        return userService.getCurrentUser(accessToken);
+        return userService.getCurrentUser();
     }
     
     @GetMapping("/playlists")
-    public Paging<PlaylistSimplified> getCurrentUserPlaylists(@RequestHeader(name = "Authorization") String accessToken) throws ParseException, SpotifyWebApiException, IOException
+    public Paging<PlaylistSimplified> getCurrentUserPlaylists() throws ParseException, SpotifyWebApiException, IOException
     {
-        return playlistService.getCurrentUserPlaylists(accessToken);
+        return playlistService.getCurrentUserPlaylists();
     }
 }

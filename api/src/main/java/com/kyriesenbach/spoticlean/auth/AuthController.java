@@ -3,6 +3,7 @@ package com.kyriesenbach.spoticlean.auth;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import org.apache.hc.core5.http.ParseException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,11 +18,13 @@ import java.net.URI;
 public class AuthController
 {
     private final AuthService authService;
+    private final String COOKIE_NAME;
     
     @Autowired
-    public AuthController(AuthService authService)
+    public AuthController(AuthService authService, Environment env)
     {
         this.authService = authService;
+        COOKIE_NAME = env.getProperty("spoticlean.spotify.cookieName");
     }
     
     @GetMapping("/url")
@@ -34,8 +37,8 @@ public class AuthController
     public String getAccessToken(@RequestParam String code, HttpServletResponse response) throws SpotifyWebApiException, ParseException, IOException
     {
         // This cookie is being set manually, as opposed to with response.setCookie(), because Spring's Cookie implementation doesn't
-        // appear to support the sameSite attribute, which Chrome is yelling at me about.
-        response.setHeader("Set-Cookie", "token=" + authService.getAccessToken(code) + "; Max-Age=3600; SameSite=None; Secure");
+        // appear to support the sameSite attribute.
+        response.setHeader("Set-Cookie", COOKIE_NAME + "=" + authService.getAccessToken(code) + "; Max-Age=3600; SameSite=None; Secure");
         response.setHeader("Access-Control-Allow-Credentials", "true");
         return "Token served in cookie";
     }

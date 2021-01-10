@@ -15,3 +15,4 @@ spoticlean:
     clientId: ${SPOTIFY_CLIENT_ID}
     clientSecret: ${SPOTIFY_CLIENT_SECRET}
     redirectUri: ${REDIRECT_URI:http://localhost:3000/spotify}
+    cookieName: spotify_token

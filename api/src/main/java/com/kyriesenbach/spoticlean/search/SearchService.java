@@ -23,9 +23,8 @@ public class SearchService
         this.spotifyApi = spotifyApi;
     }
     
-    public Paging<Track> searchTracks(String accessToken, String query) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
+    public Paging<Track> searchTracks(String query) throws ParseException, SpotifyWebApiException, IOException, InterruptedException
     {
-        spotifyApi.setAccessToken(accessToken);
         final SearchTracksRequest searchTracksRequest = spotifyApi.searchTracks(query).build();
         try
         {
