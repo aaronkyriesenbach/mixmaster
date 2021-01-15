@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 import AuthenticatedRoute from './AuthenticatedRoute';
-import PlaylistSelect from './PlaylistSelect';
+import PlaylistSelect from './playlist/PlaylistSelect';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';
 
