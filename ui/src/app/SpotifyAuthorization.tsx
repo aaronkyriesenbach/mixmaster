@@ -33,8 +33,8 @@ export default class SpotifyAuthorization extends React.Component<Props, State> 
     }
 }
 
-interface Props extends RouteComponentProps<any> {
+type Props = RouteComponentProps & {
     spotifyApi: SpotifyApi;
-}
+};
 
 type State = {};

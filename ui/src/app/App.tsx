@@ -5,6 +5,7 @@ import AuthenticatedRoute from './AuthenticatedRoute';
 import PlaylistSelect from './playlist/PlaylistSelect';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';
+import Clean, { Props as CleanProps } from './Clean';
 
 export default class App extends React.Component<Props, State> {
   componentWillMount() {
@@ -28,8 +29,13 @@ export default class App extends React.Component<Props, State> {
           />
           <AuthenticatedRoute
             path="/spotify/playlistSelect"
-            render={(props: RouteComponentProps<any>) =>
+            render={(props: RouteComponentProps) =>
               <PlaylistSelect {...props} spotifyApi={spotifyApi} />}
+          />
+          <AuthenticatedRoute
+            path="/spotify/:id/clean"
+            render={(props: CleanProps) =>
+              <Clean {...props} spotifyApi={spotifyApi} />}
           />
         </Switch>
       </Router>

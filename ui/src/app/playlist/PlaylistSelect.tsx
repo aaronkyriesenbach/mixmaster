@@ -8,7 +8,7 @@ export default class PlaylistSelect extends React.Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            playlists: []
+            playlists: [],
         };
     }
 
@@ -22,10 +22,39 @@ export default class PlaylistSelect extends React.Component<Props, State> {
             });
     }
 
-    render() {
-        const { playlists } = this.state || [];
+    onSelectPlaylist = (event: React.FormEvent) => {
+        const target = event.target as HTMLInputElement;
+        const selectedValue = target.value;
 
-        return playlists.map(playlist => <PlaylistCard playlist={playlist} />);
+        this.setState({ selectedPlaylist: selectedValue });
+    };
+
+    onSubmit = () => {
+        const { selectedPlaylist } = this.state;
+
+        window.location.href = `/spotify/${selectedPlaylist}/clean`;
+    };
+
+    render() {
+        const { playlists, selectedPlaylist } = this.state || [];
+        const { onSelectPlaylist, onSubmit } = this;
+
+        const playlistCards = playlists.map(playlist =>
+            <PlaylistCard
+                key={playlist.id}
+                playlist={playlist}
+                onSelectPlaylist={onSelectPlaylist}
+                selected={playlist.id === selectedPlaylist}
+            />
+        );
+
+        return (
+            <React.Fragment>
+                {playlistCards}
+                <br />
+                <input type='submit' disabled={!selectedPlaylist} onSubmit={onSubmit} />
+            </React.Fragment>
+        );
     }
 }
 
@@ -35,4 +64,5 @@ type Props = {
 
 type State = {
     playlists: Playlist[];
+    selectedPlaylist?: string;
 };
