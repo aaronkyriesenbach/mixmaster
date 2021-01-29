@@ -23,8 +23,7 @@ export default class PlaylistSelect extends React.Component<Props, State> {
     }
 
     onSelectPlaylist = (event: React.FormEvent) => {
-        const target = event.target as HTMLInputElement;
-        const selectedValue = target.value;
+        const selectedValue = (event.target as HTMLInputElement).value;
 
         this.setState({ selectedPlaylist: selectedValue });
     };
@@ -40,19 +39,20 @@ export default class PlaylistSelect extends React.Component<Props, State> {
         const { onSelectPlaylist, onSubmit } = this;
 
         const playlistCards = playlists.map(playlist =>
-            <PlaylistCard
-                key={playlist.id}
-                playlist={playlist}
-                onSelectPlaylist={onSelectPlaylist}
-                selected={playlist.id === selectedPlaylist}
-            />
+            <React.Fragment>
+                <PlaylistCard
+                    key={playlist.id}
+                    playlist={playlist}
+                />
+                <input type='radio' value={playlist.id} checked={playlist.id === selectedPlaylist} onChange={onSelectPlaylist} />
+            </React.Fragment>
         );
 
         return (
             <React.Fragment>
                 {playlistCards}
                 <br />
-                <input type='submit' disabled={!selectedPlaylist} onSubmit={onSubmit} />
+                <input type='submit' disabled={!selectedPlaylist} onClick={onSubmit} />
             </React.Fragment>
         );
     }

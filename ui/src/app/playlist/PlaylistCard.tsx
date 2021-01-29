@@ -3,12 +3,11 @@ import { Playlist } from '../models/Playlist';
 
 export default class PlaylistCard extends React.Component<Props, State> {
     render() {
-        const { playlist, onSelectPlaylist, selected } = this.props;
+        const { playlist } = this.props;
 
         return (
             <React.Fragment>
-                <header>{playlist.name}</header>
-                <input type='radio' value={playlist.id} checked={selected} onChange={onSelectPlaylist} />
+                <a href={`https://open.spotify.com/playlist/${playlist.id}`} target='_blank' rel='noreferrer'>{playlist.name}</a>
             </React.Fragment>
         );
     }
@@ -16,8 +15,6 @@ export default class PlaylistCard extends React.Component<Props, State> {
 
 type Props = {
     playlist: Playlist;
-    onSelectPlaylist: (event: React.FormEvent) => void;
-    selected: boolean;
 };
 
 type State = {};
