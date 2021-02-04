@@ -1,7 +1,7 @@
 import { faSpotify } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Col, Container, Row } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 import './_styles.css';
@@ -28,13 +28,20 @@ export default class Start extends React.Component<Props, State> {
         const { authUrl } = this.state;
 
         return (
-            <Button
-                variant='sign-in spotify'
-                disabled={!authUrl}
-                href={authUrl ?? '#'}
-            >
-                <FontAwesomeIcon icon={faSpotify} /> {authUrl ? 'Sign in to Spotify' : 'Loading...'}
-            </Button >
+            <Container fluid>
+                <Col className='col-sign-in'>
+                    <Row>
+                        <Button
+                            variant='sign-in spotify'
+                            disabled={!authUrl}
+                            size='lg'
+                            href={authUrl ?? '#'}
+                        >
+                            <FontAwesomeIcon icon={faSpotify} /> {authUrl ? 'Sign in to Spotify' : 'Loading...'}
+                        </Button >
+                    </Row>
+                </Col>
+            </Container>
         );
     }
 }
