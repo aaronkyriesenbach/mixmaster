@@ -1,0 +1,14 @@
+.playlist-card.image {
+    background-repeat: no-repeat;
+    background-size: contain;
+    height: 0;
+    padding-top: 100%;
+    position: relative;
+}
+
+.playlist-card.name {
+    color: white;
+    position: absolute;
+    bottom: 100%;
+    font-size: 6rem;
+}

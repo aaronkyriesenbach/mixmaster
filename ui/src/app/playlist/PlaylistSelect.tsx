@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
 import SpotifyApi from '../../api/SpotifyApi';
 import { mapPlaylists } from '../models/Mappers';
 import { Playlist } from '../models/Playlist';
@@ -35,25 +36,23 @@ export default class PlaylistSelect extends React.Component<Props, State> {
     };
 
     render() {
-        const { playlists, selectedPlaylist } = this.state || [];
+        const { playlists, selectedPlaylist } = this.state;
         const { onSelectPlaylist, onSubmit } = this;
 
         const playlistCards = playlists.map(playlist =>
-            <React.Fragment>
-                <PlaylistCard
-                    key={playlist.id}
-                    playlist={playlist}
-                />
-                <input type='radio' value={playlist.id} checked={playlist.id === selectedPlaylist} onChange={onSelectPlaylist} />
-            </React.Fragment>
+            <PlaylistCard
+                key={playlist.id}
+                playlist={playlist}
+                onSelectPlaylist={onSelectPlaylist}
+            />
         );
 
         return (
-            <React.Fragment>
+            <Container>
                 {playlistCards}
                 <br />
                 <input type='submit' disabled={!selectedPlaylist} onClick={onSubmit} />
-            </React.Fragment>
+            </Container>
         );
     }
 }

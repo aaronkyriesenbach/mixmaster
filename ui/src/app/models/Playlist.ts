@@ -1,7 +1,8 @@
-import { BaseSpotifyEntity } from "./BaseSpotifyEntity";
+import { BaseSpotifyEntity } from './BaseSpotifyEntity';
+import { Image } from './Image';
 
 export type Playlist = BaseSpotifyEntity & {
-    images: any,
+    images: Image[],
     isCollaborative: boolean,
     isPublicAccess: boolean,
     owner: any,

@@ -22,9 +22,9 @@ export default class App extends React.Component<Props, State> {
 
     return (
       <div>
-        <Navbar className='header' variant='dark' >
-          <NavbarBrand href='/' >
-            <FontAwesomeIcon icon={faMusic} /> TuneOps
+        <Navbar>
+          <NavbarBrand href='/'>
+            <FontAwesomeIcon icon={faMusic} /> MixMaster
           </NavbarBrand>
         </Navbar>
         <Container fluid className='main vh-100'>

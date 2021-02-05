@@ -1,10 +1,13 @@
 .main {
-    background-color: #fff4e0;
+    background-color: #f9f8f8;
 }
 
-.header {
-    background-color: #15afea;
-    color: #ea5015;
+.navbar {
+    background-color: #967dce;
+}
+
+.navbar-light .navbar-brand {
+    color: #f9f8f8;
 }
 
 .col-sign-in {
@@ -14,7 +17,7 @@
 }
 
 .btn-sign-in {
-    margin: 0.25rem;
+    margin-top: 0.5rem;
 }
 
 .btn-sign-in.spotify {
