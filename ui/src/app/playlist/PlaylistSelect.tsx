@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 import SpotifyApi from '../../api/SpotifyApi';
 import { mapPlaylists } from '../models/Mappers';
 import { Playlist } from '../models/Playlist';
@@ -23,10 +23,10 @@ export default class PlaylistSelect extends React.Component<Props, State> {
             });
     }
 
-    onSelectPlaylist = (event: React.FormEvent) => {
-        const selectedValue = (event.target as HTMLInputElement).value;
+    onSelectPlaylist = (id: string) => {
+        console.log(id);
 
-        this.setState({ selectedPlaylist: selectedValue });
+        this.setState({ selectedPlaylist: id });
     };
 
     onSubmit = () => {
@@ -43,13 +43,19 @@ export default class PlaylistSelect extends React.Component<Props, State> {
             <PlaylistCard
                 key={playlist.id}
                 playlist={playlist}
+                selected={selectedPlaylist === playlist.id}
                 onSelectPlaylist={onSelectPlaylist}
             />
         );
 
+        var rows = [];
+        for (var i = 0; i < playlistCards.length; i += 3) {
+            rows.push(<Row key={i} md='3'>{playlistCards.slice(i, i + 3)}</Row>);
+        }
+
         return (
-            <Container>
-                {playlistCards}
+            <Container className='playlist-container'>
+                {rows}
                 <br />
                 <input type='submit' disabled={!selectedPlaylist} onClick={onSubmit} />
             </Container>

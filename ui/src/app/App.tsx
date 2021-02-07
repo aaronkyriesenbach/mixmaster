@@ -1,3 +1,5 @@
+import { faMusic } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';
 import { Container, Navbar, NavbarBrand } from 'react-bootstrap';
@@ -8,17 +10,19 @@ import Clean, { Props as CleanProps } from './Clean';
 import PlaylistSelect from './playlist/PlaylistSelect';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';
-import { faMusic } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import './_styles.css';
 
 export default class App extends React.Component<Props, State> {
-  componentWillMount() {
+  componentDidMount() {
     this.setState({ spotifyApi: new SpotifyApi() });
   }
 
   render() {
-    const { spotifyApi } = this.state;
+    const { spotifyApi } = this.state || {};
+
+    if (!spotifyApi) {
+      return <p>Loading...</p>;
+    }
 
     return (
       <div>
@@ -27,7 +31,7 @@ export default class App extends React.Component<Props, State> {
             <FontAwesomeIcon icon={faMusic} /> MixMaster
           </NavbarBrand>
         </Navbar>
-        <Container fluid className='main vh-100'>
+        <Container fluid className='vh-100'>
           <Router>
             <Switch>
               <Route

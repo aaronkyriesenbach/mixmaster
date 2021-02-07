@@ -1,14 +1,26 @@
+.playlist-container {
+    margin-top: 1.5rem;
+}
+
+.playlist-card {
+    border-radius: 2rem;
+    border-width: 0.3rem;
+    border-color: var(--background-color);
+}
+
+.playlist-card.clickable {
+    cursor: pointer;
+}
+
+.playlist-card.selected {
+}
+
 .playlist-card.image {
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 0;
-    padding-top: 100%;
-    position: relative;
+    filter: brightness(50%);
 }
 
 .playlist-card.name {
     color: white;
-    position: absolute;
     bottom: 100%;
-    font-size: 6rem;
+    font-size: 3rem;
 }

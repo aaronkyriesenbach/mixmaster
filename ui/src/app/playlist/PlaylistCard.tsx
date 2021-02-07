@@ -1,25 +1,30 @@
+import classNames from 'classnames';
 import React from 'react';
+import { Card } from 'react-bootstrap';
+import { PLACEHOLDER_MUSIC_IMG } from '../../constants';
 import { Playlist } from '../models/Playlist';
 import './_styles.css';
 
 export default class PlaylistCard extends React.Component<Props, State> {
     render() {
-        const { playlist } = this.props;
+        const { playlist, onSelectPlaylist, selected } = this.props;
 
         return (
-            <div
-                className='playlist-card image'
-                style={{ backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(${playlist.images[0].url})` }}
+            <Card
+                className={classNames('playlist-card', { 'clickable': onSelectPlaylist }, { selected })}
+                onClick={onSelectPlaylist ? () => onSelectPlaylist(playlist.id) : undefined}
             >
-                <p className='playlist-card name'>{playlist.name}</p>
-            </div>
+                <Card.Img className='playlist-card image' src={playlist.images[0].url ?? PLACEHOLDER_MUSIC_IMG} />
+                <Card.ImgOverlay className='playlist-card name'>{playlist.name}</Card.ImgOverlay>
+            </Card>
         );
     }
 }
 
 type Props = {
     playlist: Playlist;
-    onSelectPlaylist?: (event: React.FormEvent) => void;
+    onSelectPlaylist?: (id: string) => void;
+    selected?: boolean;
 };
 
 type State = {};

@@ -1,5 +1,5 @@
-.main {
-    background-color: #f9f8f8;
+:root {
+    --background-color: #f9f8f8;
 }
 
 .navbar {
@@ -7,7 +7,7 @@
 }
 
 .navbar-light .navbar-brand {
-    color: #f9f8f8;
+    color:var(--background-color);
 }
 
 .col-sign-in {
@@ -22,5 +22,5 @@
 
 .btn-sign-in.spotify {
     background-color: #1db954;
-    color: #ffffff
+    color: white;
 }
