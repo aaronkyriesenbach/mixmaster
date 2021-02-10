@@ -45,6 +45,7 @@ export default class PlaylistSelect extends React.Component<Props, State> {
                 playlist={playlist}
                 selected={selectedPlaylist === playlist.id}
                 onSelectPlaylist={onSelectPlaylist}
+                onSubmit={onSubmit}
             />
         );
 
@@ -56,8 +57,6 @@ export default class PlaylistSelect extends React.Component<Props, State> {
         return (
             <Container className='playlist-container'>
                 {rows}
-                <br />
-                <input type='submit' disabled={!selectedPlaylist} onClick={onSubmit} />
             </Container>
         );
     }

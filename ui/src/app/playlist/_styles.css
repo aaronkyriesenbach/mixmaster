@@ -13,6 +13,9 @@
 }
 
 .playlist-card.selected {
+    border-width: 1rem;
+    border-radius: 3rem;
+    border-color: black;
 }
 
 .playlist-card.image {
@@ -21,6 +24,5 @@
 
 .playlist-card.name {
     color: white;
-    bottom: 100%;
     font-size: 3rem;
 }
