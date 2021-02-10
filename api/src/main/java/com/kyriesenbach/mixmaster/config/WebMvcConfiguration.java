@@ -1,6 +1,6 @@
-package com.kyriesenbach.spoticlean.config;
+package com.kyriesenbach.mixmaster.config;
 
-import com.kyriesenbach.spoticlean.auth.AuthInterceptor;
+import com.kyriesenbach.mixmaster.auth.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

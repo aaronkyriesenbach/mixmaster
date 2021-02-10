@@ -10,7 +10,7 @@ logging:
 server:
   port: 8080
 
-spoticlean:
+mixmaster:
   spotify:
     clientId: ${SPOTIFY_CLIENT_ID}
     clientSecret: ${SPOTIFY_CLIENT_SECRET}

@@ -1,4 +1,4 @@
-package com.kyriesenbach.spoticlean.auth;
+package com.kyriesenbach.mixmaster.auth;
 
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;

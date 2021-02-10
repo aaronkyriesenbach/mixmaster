@@ -1,6 +1,6 @@
-package com.kyriesenbach.spoticlean.user;
+package com.kyriesenbach.mixmaster.user;
 
-import com.kyriesenbach.spoticlean.playlist.PlaylistService;
+import com.kyriesenbach.mixmaster.playlist.PlaylistService;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Paging;
 import com.wrapper.spotify.model_objects.specification.PlaylistSimplified;
