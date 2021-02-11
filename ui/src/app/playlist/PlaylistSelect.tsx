@@ -24,28 +24,18 @@ export default class PlaylistSelect extends React.Component<Props, State> {
     }
 
     onSelectPlaylist = (id: string) => {
-        console.log(id);
-
-        this.setState({ selectedPlaylist: id });
-    };
-
-    onSubmit = () => {
-        const { selectedPlaylist } = this.state;
-
-        window.location.href = `/spotify/${selectedPlaylist}/clean`;
+        window.location.href = `/spotify/${id}/clean`;
     };
 
     render() {
-        const { playlists, selectedPlaylist } = this.state;
-        const { onSelectPlaylist, onSubmit } = this;
+        const { playlists } = this.state;
+        const { onSelectPlaylist } = this;
 
         const playlistCards = playlists.map(playlist =>
             <PlaylistCard
                 key={playlist.id}
                 playlist={playlist}
-                selected={selectedPlaylist === playlist.id}
-                onSelectPlaylist={onSelectPlaylist}
-                onSubmit={onSubmit}
+                onClick={onSelectPlaylist}
             />
         );
 
@@ -68,5 +58,4 @@ type Props = {
 
 type State = {
     playlists: Playlist[];
-    selectedPlaylist?: string;
 };

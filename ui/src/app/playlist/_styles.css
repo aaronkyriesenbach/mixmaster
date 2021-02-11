@@ -1,21 +1,12 @@
 .playlist-container {
-    margin-top: 1.5rem;
+    margin-top: var(--margin-top);
 }
 
 .playlist-card {
     border-radius: 2rem;
     border-width: 0.3rem;
     border-color: var(--background-color);
-}
-
-.playlist-card.clickable {
     cursor: pointer;
-}
-
-.playlist-card.selected {
-    border-width: 1rem;
-    border-radius: 3rem;
-    border-color: black;
 }
 
 .playlist-card.image {

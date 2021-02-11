@@ -1,9 +1,12 @@
 :root {
+    --foreground-color: #967dce;
+    --secondary-color: #c4a386;
     --background-color: #f9f8f8;
+    --margin-top: 1.5rem;
 }
 
 .navbar {
-    background-color: #967dce;
+    background-color: var(--foreground-color);
 }
 
 .navbar-light .navbar-brand {
@@ -17,7 +20,7 @@
 }
 
 .btn-sign-in {
-    margin-top: 0.5rem;
+    margin-top: var(--margin-top);
 }
 
 .btn-sign-in.spotify {

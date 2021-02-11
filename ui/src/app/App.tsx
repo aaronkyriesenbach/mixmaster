@@ -6,7 +6,7 @@ import { Container, Navbar, NavbarBrand } from 'react-bootstrap';
 import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 import AuthenticatedRoute from './AuthenticatedRoute';
-import Clean, { Props as CleanProps } from './Clean';
+import Clean, { Props as CleanProps } from './clean/Clean';
 import PlaylistSelect from './playlist/PlaylistSelect';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';

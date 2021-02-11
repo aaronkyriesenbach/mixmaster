@@ -1,0 +1,23 @@
+.clean-container {
+    margin-top: var(--margin-top);
+}
+
+.new-name-container {
+    height: 100%;
+}
+
+.new-name {
+    display: flex;
+    align-items: center;
+}
+
+.new-name.instructions {
+    font-size: 4em;
+    text-align: center;
+    color: var(--secondary-color);
+    justify-content: center;
+}
+
+.submit-button {
+    outline: none;
+}

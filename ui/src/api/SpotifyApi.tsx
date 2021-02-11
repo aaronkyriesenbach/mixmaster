@@ -25,4 +25,8 @@ export default class SpotifyApi {
 
         return this.api.post(`/playlist/${playlistId}/clean?cleanPlaylistName=${encodedName}`);
     }
+
+    public getPlaylist(playlistId: string): Promise<AxiosResponse> {
+        return this.api.get(`/playlist/${playlistId}`);
+    }
 }    
