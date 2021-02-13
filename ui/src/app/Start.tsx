@@ -35,7 +35,7 @@ export default class Start extends React.Component<Props, State> {
                             variant='sign-in spotify'
                             disabled={!authUrl}
                             size='lg'
-                            href={authUrl ?? '#'}
+                            href={authUrl}
                         >
                             <FontAwesomeIcon icon={faSpotify} /> {authUrl ? 'Sign in to Spotify' : 'Loading...'}
                         </Button >

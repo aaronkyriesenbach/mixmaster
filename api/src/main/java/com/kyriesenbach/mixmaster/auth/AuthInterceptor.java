@@ -9,7 +9,8 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
+import java.util.Arrays;
+import java.util.Optional;
 
 @Component
 public class AuthInterceptor implements HandlerInterceptor
@@ -27,18 +28,13 @@ public class AuthInterceptor implements HandlerInterceptor
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
     {
-        HashMap<String, String> cookies = new HashMap<>();
         if (request.getCookies() != null)
         {
-            for (Cookie cookie : request.getCookies())
-            {
-                cookies.put(cookie.getName(), cookie.getValue());
-            }
+            final Optional<Cookie> cookie = Arrays.stream(request.getCookies())
+                .filter(c -> COOKIE_NAME.equals(c.getName()))
+                .findAny();
             
-            if (cookies.get(COOKIE_NAME) != null)
-            {
-                spotifyApi.setAccessToken(cookies.get(COOKIE_NAME));
-            }
+            cookie.ifPresent(c -> spotifyApi.setAccessToken(c.getValue()));
         }
         return true;
     }
