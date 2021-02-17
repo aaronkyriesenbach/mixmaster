@@ -1,7 +1,7 @@
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Col, Container, Row, Spinner } from 'react-bootstrap';
+import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../../api/SpotifyApi';
 import { Playlist } from '../models/Playlist';
@@ -37,27 +37,19 @@ export default class Clean extends React.Component<Props, State> {
             .then(res => {
                 const newPlaylist: Playlist = res.data;
 
-                this.setState({ cleanedPlaylist: newPlaylist });
+                window.location.href = `/spotify/postClean?playlistId=${newPlaylist.id}`;
             })
             .catch(err => this.setState({ error: err }));
     };
 
     renderResults = () => {
-        const { error, cleanedPlaylist } = this.state;
+        const { error } = this.state;
 
         if (error) {
             return (
                 <React.Fragment>
                     <header>Failed to clean playlist</header>
                     {error}
-                </React.Fragment>
-            );
-        }
-        if (cleanedPlaylist) {
-            return (
-                <React.Fragment>
-                    <header>Cleaned playlist:</header>
-                    <PlaylistCard playlist={cleanedPlaylist} />
                 </React.Fragment>
             );
         }
@@ -88,10 +80,10 @@ export default class Clean extends React.Component<Props, State> {
                                     <header>what would you like to call your new playlist?</header>
                                 </Col>
                                 <Col className='new-name'>
-                                    <input type='text' onChange={onChangeName} />
-                                    <button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
+                                    <input type='text' className='new-name input' onChange={onChangeName} />
+                                    <Button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
                                         <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                                    </button>
+                                    </Button>
                                 </Col>
                             </Row>
                         </Col>
@@ -112,5 +104,4 @@ type State = {
     newName?: string;
     error?: any;
     started: boolean;
-    cleanedPlaylist?: Playlist;
 };

@@ -1,0 +1,12 @@
+.cleaned-text {
+    margin-top: 10rem;
+    font-size: 4em;
+    text-align: center;
+    color: var(--secondary-color);
+    justify-content: center;
+}
+
+.again-button {
+    background-color: var(--foreground-color);
+    border: none;
+}

@@ -1,8 +1,7 @@
-import classNames from 'classnames';
 import React from 'react';
 import { Card } from 'react-bootstrap';
-import { PLACEHOLDER_MUSIC_IMG } from '../../constants';
 import { Playlist } from '../models/Playlist';
+import placeholder from './placeholder.png';
 import './_styles.css';
 
 export default class PlaylistCard extends React.Component<Props, State> {
@@ -14,7 +13,7 @@ export default class PlaylistCard extends React.Component<Props, State> {
                 className={'playlist-card'}
                 onClick={onClick ? () => onClick(playlist.id) : () => window.open(`https://open.spotify.com/playlist/${playlist.id}`, '_blank')}
             >
-                <Card.Img className='playlist-card image' src={playlist.images[0].url ?? PLACEHOLDER_MUSIC_IMG} />
+                <Card.Img className='playlist-card image' src={playlist.images[0] ? playlist.images[0].url : placeholder} />
                 <Card.ImgOverlay className='playlist-card name'>{playlist.name}</Card.ImgOverlay>
             </Card>
         );

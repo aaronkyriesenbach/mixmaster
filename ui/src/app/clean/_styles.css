@@ -18,6 +18,17 @@
     justify-content: center;
 }
 
+.new-name.input {
+    width: 28rem;
+}
+
 .submit-button {
-    outline: none;
+    background-color: var(--foreground-color);
+    border: none;
+    margin-left: 1rem;
+}
+
+.submit-button:disabled {
+    background-color: var(--secondary-color);
+    border: none;
 }

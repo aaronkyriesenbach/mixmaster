@@ -91,8 +91,11 @@ public class PlaylistService
             }
             uris = uris.subList(limit, uris.size());
         }
-        final AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(playlistId, uris.toArray(String[]::new)).build();
-        addItemsToPlaylistRequest.execute();
+        if (uris.size() > 0)
+        {
+            final AddItemsToPlaylistRequest addItemsToPlaylistRequest = spotifyApi.addItemsToPlaylist(playlistId, uris.toArray(String[]::new)).build();
+            addItemsToPlaylistRequest.execute();
+        }
     }
     
     public Playlist duplicatePlaylist(String oldPlaylistId, String newPlaylistName) throws ParseException, SpotifyWebApiException, IOException, InterruptedException

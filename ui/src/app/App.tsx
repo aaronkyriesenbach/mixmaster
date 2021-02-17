@@ -8,6 +8,7 @@ import SpotifyApi from '../api/SpotifyApi';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import Clean, { Props as CleanProps } from './clean/Clean';
 import PlaylistSelect from './playlist/PlaylistSelect';
+import PostClean from './post-clean/PostClean';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';
 import './_styles.css';
@@ -52,6 +53,11 @@ export default class App extends React.Component<Props, State> {
                 path="/spotify/:id/clean"
                 render={(props: CleanProps) =>
                   <Clean {...props} spotifyApi={spotifyApi} />}
+              />
+              <AuthenticatedRoute
+                path="/spotify/postClean"
+                render={(props: RouteComponentProps) =>
+                  <PostClean {...props} spotifyApi={spotifyApi} />}
               />
             </Switch>
           </Router>

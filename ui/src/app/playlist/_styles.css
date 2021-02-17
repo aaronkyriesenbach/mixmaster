@@ -3,7 +3,7 @@
 }
 
 .playlist-card {
-    border-radius: 2rem;
+    border-radius: 6rem;
     border-width: 0.3rem;
     border-color: var(--background-color);
     cursor: pointer;
@@ -16,4 +16,6 @@
 .playlist-card.name {
     color: white;
     font-size: 3rem;
+    margin-left: 9%;
+    margin-top: 7%;
 }
