@@ -7,6 +7,7 @@ import { BrowserRouter as Router, Route, RouteComponentProps, Switch } from 'rea
 import SpotifyApi from '../api/SpotifyApi';
 import AuthenticatedRoute from './AuthenticatedRoute';
 import Clean, { Props as CleanProps } from './clean/Clean';
+import Loading from './loading/Loading';
 import PlaylistSelect from './playlist/PlaylistSelect';
 import PostClean from './post-clean/PostClean';
 import SpotifyAuthorization from './SpotifyAuthorization';
@@ -22,7 +23,7 @@ export default class App extends React.Component<Props, State> {
     const { spotifyApi } = this.state || {};
 
     if (!spotifyApi) {
-      return <p>Loading...</p>;
+      return <Loading />;
     }
 
     return (

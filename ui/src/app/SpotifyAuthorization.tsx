@@ -4,7 +4,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
 import { SPOTIFY_TOKEN } from '../constants';
 
-export default class SpotifyAuthorization extends React.Component<Props, any> {
+export default class SpotifyAuthorization extends React.Component<Props, {}> {
     async componentDidMount() {
         const { location } = this.props;
         const query = new URLSearchParams(location.search);
@@ -13,7 +13,6 @@ export default class SpotifyAuthorization extends React.Component<Props, any> {
         if (authCode) {
             const { spotifyApi } = this.props;
 
-            console.log(`Received auth code ${authCode}`);
             await spotifyApi.getAccessToken(authCode);
         }
 
