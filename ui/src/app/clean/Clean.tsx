@@ -1,9 +1,10 @@
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Button, Col, Container, Row, Spinner } from 'react-bootstrap';
+import { Button, Col, Container, Row, Toast } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../../api/SpotifyApi';
+import Loading from '../loading/Loading';
 import { Playlist } from '../models/Playlist';
 import PlaylistCard from '../playlist/PlaylistCard';
 import './_styles.css';
@@ -42,34 +43,24 @@ export default class Clean extends React.Component<Props, State> {
             .catch(err => this.setState({ error: err }));
     };
 
-    renderResults = () => {
-        const { error } = this.state;
-
-        if (error) {
-            return (
-                <React.Fragment>
-                    <header>Failed to clean playlist</header>
-                    {error}
-                </React.Fragment>
-            );
-        }
-        else {
-            return (
-                <header>Cleaning in progress...</header>
-            );
-        }
-    };
-
     render() {
-        const { newName, started, playlist } = this.state || {};
-        const { onChangeName, cleanPlaylist, renderResults } = this;
+        const { newName, started, playlist, error } = this.state || {};
+        const { onChangeName, cleanPlaylist } = this;
 
         if (started) {
-            return renderResults();
+            return <Loading message="Cleaning in progress..." />;
         }
         if (playlist) {
             return (
-                <Container fluid className='clean-container'>
+                <Container fluid>
+                    {started && <p>Cleaning in progress...</p>}
+                    {error &&
+                        <Toast>
+                            <Toast.Header>
+                                <header>Failed to clean playlist</header>
+                            </Toast.Header>
+                            <Toast.Body>{error.data}</Toast.Body>
+                        </Toast>}
                     <Row>
                         <Col md='5'>
                             <PlaylistCard playlist={playlist} />
@@ -91,7 +82,7 @@ export default class Clean extends React.Component<Props, State> {
                 </Container>
             );
         }
-        return (<Spinner animation='border' />);
+        return (<Loading />);
     }
 }
 

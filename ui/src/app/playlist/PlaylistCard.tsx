@@ -10,7 +10,7 @@ export default class PlaylistCard extends React.Component<Props, State> {
 
         return (
             <Card
-                className={'playlist-card'}
+                className='playlist-card'
                 onClick={onClick ? () => onClick(playlist.id) : () => window.open(`https://open.spotify.com/playlist/${playlist.id}`, '_blank')}
             >
                 <Card.Img className='playlist-card image' src={playlist.images[0] ? playlist.images[0].url : placeholder} />
