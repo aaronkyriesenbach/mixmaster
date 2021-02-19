@@ -1,4 +1,4 @@
-package com.kyriesenbach.mixmaster.config;
+package com.kyriesenbach.mixster.config;
 
 import com.wrapper.spotify.SpotifyApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +20,9 @@ public class ApplicationConfiguration
     @Autowired
     public ApplicationConfiguration(Environment env)
     {
-        CLIENT_ID = env.getProperty("mixmaster.spotify.clientId");
-        CLIENT_SECRET = env.getProperty("mixmaster.spotify.clientSecret");
-        REDIRECT_URI = env.getProperty("mixmaster.spotify.redirectUri");
+        CLIENT_ID = env.getProperty("mixster.spotify.clientId");
+        CLIENT_SECRET = env.getProperty("mixster.spotify.clientSecret");
+        REDIRECT_URI = env.getProperty("mixster.spotify.redirectUri");
     }
     
     @Bean

@@ -1,4 +1,4 @@
-package com.kyriesenbach.mixmaster.search;
+package com.kyriesenbach.mixster.search;
 
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;

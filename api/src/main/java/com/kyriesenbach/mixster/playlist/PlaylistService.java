@@ -1,7 +1,7 @@
-package com.kyriesenbach.mixmaster.playlist;
+package com.kyriesenbach.mixster.playlist;
 
-import com.kyriesenbach.mixmaster.search.SearchService;
-import com.kyriesenbach.mixmaster.user.UserService;
+import com.kyriesenbach.mixster.search.SearchService;
+import com.kyriesenbach.mixster.user.UserService;
 import com.wrapper.spotify.SpotifyApi;
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.exceptions.detailed.TooManyRequestsException;

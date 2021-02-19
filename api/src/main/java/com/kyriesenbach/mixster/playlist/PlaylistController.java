@@ -1,4 +1,4 @@
-package com.kyriesenbach.mixmaster.playlist;
+package com.kyriesenbach.mixster.playlist;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import com.wrapper.spotify.model_objects.specification.Playlist;

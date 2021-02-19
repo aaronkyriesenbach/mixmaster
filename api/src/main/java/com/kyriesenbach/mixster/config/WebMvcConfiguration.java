@@ -1,6 +1,6 @@
-package com.kyriesenbach.mixmaster.config;
+package com.kyriesenbach.mixster.config;
 
-import com.kyriesenbach.mixmaster.auth.AuthInterceptor;
+import com.kyriesenbach.mixster.auth.AuthInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

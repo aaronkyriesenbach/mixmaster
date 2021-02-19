@@ -1,4 +1,4 @@
-package com.kyriesenbach.mixmaster.auth;
+package com.kyriesenbach.mixster.auth;
 
 import com.wrapper.spotify.SpotifyApi;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +22,7 @@ public class AuthInterceptor implements HandlerInterceptor
     public AuthInterceptor(SpotifyApi spotifyApi, Environment env)
     {
         this.spotifyApi = spotifyApi;
-        COOKIE_NAME = env.getProperty("mixmaster.spotify.cookieName");
+        COOKIE_NAME = env.getProperty("mixster.spotify.cookieName");
     }
     
     @Override

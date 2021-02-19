@@ -1,4 +1,4 @@
-package com.kyriesenbach.mixmaster.auth;
+package com.kyriesenbach.mixster.auth;
 
 import com.wrapper.spotify.exceptions.SpotifyWebApiException;
 import org.apache.hc.core5.http.ParseException;
@@ -24,7 +24,7 @@ public class AuthController
     public AuthController(AuthService authService, Environment env)
     {
         this.authService = authService;
-        COOKIE_NAME = env.getProperty("mixmaster.spotify.cookieName");
+        COOKIE_NAME = env.getProperty("mixster.spotify.cookieName");
     }
     
     @GetMapping("/url")

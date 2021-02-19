@@ -30,7 +30,7 @@ export default class App extends React.Component<Props, State> {
       <div>
         <Navbar>
           <NavbarBrand href='/'>
-            <FontAwesomeIcon icon={faMusic} /> MixMaster
+            <FontAwesomeIcon icon={faMusic} /> Mixster
           </NavbarBrand>
         </Navbar>
         <Container fluid className='vh-100'>

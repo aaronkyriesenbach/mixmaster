@@ -10,9 +10,9 @@ logging:
 server:
   port: 8080
 
-mixmaster:
+mixster:
   spotify:
     clientId: ${SPOTIFY_CLIENT_ID}
     clientSecret: ${SPOTIFY_CLIENT_SECRET}
-    redirectUri: ${REDIRECT_URI:http://localhost:3000/spotify}
+    redirectUri: ${SPOTIFY_REDIRECT_URI:http://localhost:3000/spotify}
     cookieName: spotify_token
