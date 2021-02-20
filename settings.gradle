@@ -1,3 +1,4 @@
 rootProject.name = 'mixster'
 include 'api'
 
+project(':api').name = 'mixmaster-api'
