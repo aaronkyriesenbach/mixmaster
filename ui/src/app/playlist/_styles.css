@@ -7,13 +7,10 @@
     border-width: 0.3rem;
     border-color: var(--background-color);
     cursor: pointer;
-    width: 100%;
-    padding-top: 100%;
 }
 
 .playlist-card.image {
     filter: brightness(50%);
-    background-size: contain;
 }
 
 .playlist-card.name {
