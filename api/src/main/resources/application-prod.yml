@@ -1,0 +1,9 @@
+security:
+  require-ssl: true
+
+server:
+  ssl:
+    key-store: /etc/letsencrypt/live/mixster.io/keystore.p12
+    key-store-password: ${KEY_STORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: tomcat
