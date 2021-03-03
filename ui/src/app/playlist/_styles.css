@@ -11,6 +11,7 @@
 
 .playlist-card.image {
     filter: brightness(50%);
+    background-size: contain;
 }
 
 .playlist-card.name {
