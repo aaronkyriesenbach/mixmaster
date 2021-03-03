@@ -24,7 +24,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "start-prod": "REACT_APP_API_HOST=https://mixster.io react-scripts start",
+    "start-prod": "REACT_APP_API_HOST=https://api.mixster.io react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
