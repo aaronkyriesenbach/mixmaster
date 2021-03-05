@@ -1,20 +1,16 @@
-.new-name-container {
-    height: 100%;
+.clean-container {
+    position: absolute;
+    top: 0;
 }
 
-.new-name {
-    display: flex;
-    align-items: center;
-}
-
-.new-name.instructions {
+.instructions {
     font-size: 4em;
     text-align: center;
     color: var(--secondary-color);
     justify-content: center;
 }
 
-.new-name.input {
+.input {
     width: 28rem;
 }
 

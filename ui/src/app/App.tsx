@@ -28,12 +28,12 @@ export default class App extends React.Component<Props, State> {
 
     return (
       <div>
-        <Navbar>
+        <Navbar className='mb-4'>
           <NavbarBrand href='/'>
             <FontAwesomeIcon icon={faMusic} /> Mixster
           </NavbarBrand>
         </Navbar>
-        <Container fluid className='pt-4'>
+        <Container fluid>
           <Router>
             <Switch>
               <Route

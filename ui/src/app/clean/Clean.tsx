@@ -18,7 +18,8 @@ export default class Clean extends React.Component<Props, State> {
             .then(response => {
                 const playlist = response.data as Playlist;
                 this.setState({ playlist: playlist });
-            });
+            })
+            .catch(err => this.setState({ error: err }));
     }
 
     // TODO: Add validation once I can find Spotify's documentation for what's allowed
@@ -52,32 +53,28 @@ export default class Clean extends React.Component<Props, State> {
         }
         if (playlist) {
             return (
-                <Container fluid>
-                    {started && <p>Cleaning in progress...</p>}
+                <Container fluid className='clean-container vh-100 d-flex flex-row'>
                     {error &&
                         <Toast>
                             <Toast.Header>
                                 <header>Failed to clean playlist</header>
                             </Toast.Header>
                             <Toast.Body>{error.data}</Toast.Body>
-                        </Toast>}
+                        </Toast>
+                    }
+                    <Col md='5'>
+                        <PlaylistCard playlist={playlist} />
+                    </Col>
                     <Row>
-                        <Col md='5'>
-                            <PlaylistCard playlist={playlist} />
+                        <Col className='instructions'>
+                            <header>what would you like to call your new playlist?</header>
                         </Col>
-                        <Col>
-                            <Row className='new-name-container'>
-                                <Col className='new-name instructions'>
-                                    <header>what would you like to call your new playlist?</header>
-                                </Col>
-                                <Col className='new-name'>
-                                    <input type='text' className='new-name input' onChange={onChangeName} />
-                                    <Button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
-                                        <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                                    </Button>
-                                </Col>
-                            </Row>
-                        </Col>
+                        <Row>
+                            <input type='text' className='input' onChange={onChangeName} />
+                            <Button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
+                                <FontAwesomeIcon icon={faArrowAltCircleRight} />
+                            </Button>
+                        </Row>
                     </Row>
                 </Container>
             );
