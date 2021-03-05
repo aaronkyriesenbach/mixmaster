@@ -1,12 +1,11 @@
-.playlist-container {
-    margin-top: var(--margin-top);
-}
-
 .playlist-card {
     border-radius: 6rem;
     border-width: 0.3rem;
     border-color: var(--background-color);
     cursor: pointer;
+    overflow: hidden;
+    width: 25rem;
+    height: 25rem;
 }
 
 .playlist-card.image {
@@ -15,6 +14,6 @@
 
 .playlist-card.name {
     color: white;
-    font-size: 3rem;
-    margin: 8%;
+    font-size: 2.8rem;
+    padding: 10%;
 }

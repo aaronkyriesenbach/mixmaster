@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Col, Container, Row } from 'react-bootstrap';
 import SpotifyApi from '../../api/SpotifyApi';
 import { mapPlaylists } from '../models/Mappers';
 import { Playlist } from '../models/Playlist';
@@ -19,6 +19,7 @@ export default class PlaylistSelect extends React.Component<Props, State> {
         spotifyApi.getCurrentUserPlaylists()
             .then(response => {
                 const playlists = response.data.items.map(mapPlaylists);
+
                 this.setState({ playlists: playlists });
             });
     }
@@ -41,12 +42,14 @@ export default class PlaylistSelect extends React.Component<Props, State> {
 
         var rows = [];
         for (var i = 0; i < playlistCards.length; i += 3) {
-            rows.push(<Row key={i} md='3'>{playlistCards.slice(i, i + 3)}</Row>);
+            rows.push(<Row key={i} className='justify-content-center'>{playlistCards.slice(i, i + 3)}</Row>);
         }
 
         return (
-            <Container className='playlist-container'>
-                {rows}
+            <Container fluid>
+                <Col>
+                    {rows}
+                </Col>
             </Container>
         );
     }

@@ -2,25 +2,14 @@
     --foreground-color: #967dce;
     --secondary-color: #c4a386;
     --background-color: #f9f8f8;
-    --margin-top: 1.5rem;
 }
 
 .navbar {
     background-color: var(--foreground-color);
 }
 
-.navbar-light .navbar-brand {
-    color:var(--background-color);
-}
-
-.col-sign-in {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.btn-sign-in {
-    margin-top: var(--margin-top);
+.navbar-brand {
+    color: var(--background-color) !important;
 }
 
 .btn-sign-in.spotify {
