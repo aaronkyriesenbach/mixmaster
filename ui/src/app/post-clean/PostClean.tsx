@@ -1,7 +1,7 @@
 import { faMusic } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Button, Col, Container, Row } from 'react-bootstrap';
+import { Button, Col, Container } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../../api/SpotifyApi';
 import { Playlist } from '../models/Playlist';
@@ -22,27 +22,30 @@ export default class PostClean extends React.Component<Props, State> {
         const { spotifyApi } = this.props;
         const { playlistId } = this.state;
 
-        playlistId && spotifyApi.getPlaylist(playlistId)
-            .then(res => this.setState({ playlist: res.data as Playlist }));
+        if (playlistId) {
+            spotifyApi.getPlaylist(playlistId)
+                .then(res => this.setState({ playlist: res.data as Playlist }));
+        }
+        else {
+            window.location.href = '/spotify/playlistSelect';
+        }
     }
 
     render() {
         const { playlist } = this.state;
 
         return (
-            <Container fluid className='clean-container'>
-                <Row>
-                    <Col md='5'>
-                        {playlist && <PlaylistCard playlist={playlist} />}
-                    </Col>
-                    <Col className='cleaned-text'>
-                        <header>enjoy your new playlist!</header>
-                        <header>clean another?</header>
-                        <Button className='again-button' onClick={() => window.location.href = '/spotify/playlistSelect'}>
-                            <FontAwesomeIcon icon={faMusic} />
-                        </Button>
-                    </Col>
-                </Row>
+            <Container fluid className='clean-container d-flex flex-row align-items-center'>
+                <Col className='d-flex justify-content-center'>
+                    {playlist && <PlaylistCard large playlist={playlist} />}
+                </Col>
+                <Col className='cleaned-text'>
+                    <header>enjoy your new playlist!</header>
+                    <header>clean another?</header>
+                    <Button className='again-button' onClick={() => window.location.href = '/spotify/playlistSelect'}>
+                        <FontAwesomeIcon icon={faMusic} size='2x' />
+                    </Button>
+                </Col>
             </Container>
         );
     }

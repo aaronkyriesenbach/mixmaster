@@ -1,12 +1,19 @@
+.clean-container {
+    position: absolute;
+    top: 0;
+}
+
 .cleaned-text {
-    margin-top: 10rem;
-    font-size: 4em;
+    font: 4em 'Righteous';
     text-align: center;
     color: var(--secondary-color);
     justify-content: center;
 }
 
 .again-button {
-    background-color: var(--foreground-color);
+    background-color: var(--foreground-color) !important;
     border: none;
+    margin-left: 1rem;
+    height: 4rem;
+    width: 4rem;
 }
