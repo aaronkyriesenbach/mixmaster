@@ -1,0 +1,28 @@
+:root {
+    --spinner-size: 25rem;
+}
+
+.loading-container {
+    position: absolute;
+    top: 0;
+}
+
+.spinner {
+    width: var(--spinner-size);
+    height: var(--spinner-size);
+    border-width: 3rem;
+    color: var(--secondary-color);
+
+    margin-top: 15rem;
+
+    &.message {
+        margin-top: 5rem;
+    }
+}
+
+.message {
+    font: 5em 'Righteous';
+    color: var(--secondary-color);
+    
+    margin-top: 8rem;
+}

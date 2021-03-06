@@ -1,13 +1,13 @@
 import { faArrowAltCircleRight } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
-import { Button, Col, Container, Row, Toast } from 'react-bootstrap';
+import { Button, Col, Container, Toast } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../../api/SpotifyApi';
 import Loading from '../loading/Loading';
 import { Playlist } from '../models/Playlist';
 import PlaylistCard from '../playlist/PlaylistCard';
-import './_styles.css';
+import './_styles.scss';
 
 export default class Clean extends React.Component<Props, State> {
     componentWillMount() {
@@ -53,7 +53,7 @@ export default class Clean extends React.Component<Props, State> {
         }
         if (playlist) {
             return (
-                <Container fluid className='clean-container vh-100 d-flex flex-row'>
+                <Container fluid className='clean-container d-flex flex-row align-items-center'>
                     {error &&
                         <Toast>
                             <Toast.Header>
@@ -62,20 +62,18 @@ export default class Clean extends React.Component<Props, State> {
                             <Toast.Body>{error.data}</Toast.Body>
                         </Toast>
                     }
-                    <Col md='5'>
-                        <PlaylistCard playlist={playlist} />
+                    <Col className='align-items-center'>
+                        <PlaylistCard large playlist={playlist} />
                     </Col>
-                    <Row>
-                        <Col className='instructions'>
-                            <header>what would you like to call your new playlist?</header>
-                        </Col>
-                        <Row>
-                            <input type='text' className='input' onChange={onChangeName} />
-                            <Button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
-                                <FontAwesomeIcon icon={faArrowAltCircleRight} />
-                            </Button>
-                        </Row>
-                    </Row>
+                    <Col className='instructions'>
+                        <header>what would you like to call your new playlist?</header>
+                    </Col>
+                    <Col>
+                        <input type='text' className='input' onChange={onChangeName} />
+                        <Button className='submit-button' disabled={!newName} onClick={cleanPlaylist}>
+                            <FontAwesomeIcon icon={faArrowAltCircleRight} size='2x' />
+                        </Button>
+                    </Col>
                 </Container>
             );
         }

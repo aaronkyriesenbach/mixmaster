@@ -4,7 +4,7 @@ import React from 'react';
 import { Button, Col, Container } from 'react-bootstrap';
 import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../api/SpotifyApi';
-import './_styles.css';
+import './_styles.scss';
 
 export default class Start extends React.Component<Props, State> {
     constructor(props: Props) {

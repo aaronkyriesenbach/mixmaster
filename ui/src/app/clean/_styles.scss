@@ -1,13 +1,15 @@
 .clean-container {
     position: absolute;
     top: 0;
+    width: 99%;
+    height: 99%;
 }
 
 .instructions {
-    font-size: 4em;
     text-align: center;
     color: var(--secondary-color);
     justify-content: center;
+    font: 4em 'Righteous';
 }
 
 .input {
@@ -15,12 +17,9 @@
 }
 
 .submit-button {
-    background-color: var(--foreground-color);
+    background-color: var(--foreground-color) !important;
     border: none;
     margin-left: 1rem;
-}
-
-.submit-button:disabled {
-    background-color: var(--secondary-color);
-    border: none;
+    height: 4rem;
+    width: 4rem;
 }

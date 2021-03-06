@@ -12,7 +12,7 @@ import PlaylistSelect from './playlist/PlaylistSelect';
 import PostClean from './post-clean/PostClean';
 import SpotifyAuthorization from './SpotifyAuthorization';
 import Start from './Start';
-import './_styles.css';
+import './_styles.scss';
 
 export default class App extends React.Component<Props, State> {
   componentDidMount() {

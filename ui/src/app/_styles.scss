@@ -1,0 +1,28 @@
+@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/css?family=Righteous);
+
+:root {
+    --foreground-color: #967dce;
+    --secondary-color: #c4a386;
+    --background-color: #f2e9e9;
+}
+
+.navbar {
+    background-color: var(--foreground-color);
+    z-index: 1;
+}
+
+.navbar-brand {
+    color: var(--background-color) !important;
+    font: 1.5em 'Lobster';
+    letter-spacing: 1px;
+}
+
+.btn-sign-in {
+    color: white !important;
+    font-family: Arial, Helvetica, sans-serif;
+
+    &.spotify {
+        background-color: #1db954;
+    }
+}

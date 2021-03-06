@@ -6,7 +6,7 @@ import { RouteComponentProps } from 'react-router-dom';
 import SpotifyApi from '../../api/SpotifyApi';
 import { Playlist } from '../models/Playlist';
 import PlaylistCard from '../playlist/PlaylistCard';
-import './_styles.css';
+import './_styles.scss';
 
 export default class PostClean extends React.Component<Props, State> {
     constructor(props: Props) {
